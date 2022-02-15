@@ -1,0 +1,37 @@
+{
+  "name": "unit2",
+  "version": "1.0.0",
+  "description": "lesson 2",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "task run": "node hw2/task.js",
+    "test": "jest",
+    "test:watch": "jest --watchAll",
+    "test:coverage": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": " "
+  },
+  "keywords": [
+    "js",
+    "jest"
+  ],
+  "author": "os",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^27.4.0",
+    "jest": "^27.5.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.16.7",
+    "@babel/plugin-transform-spread": "^7.16.7",
+    "eslint": "^8.7.0"
+  },
+  "dependencies": {
+    "@babel/core": "^7.16.7",
+    "@babel/preset-env": "^7.16.7",
+    "babel-jest": "^27.4.6",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-es2020": "^1.0.2"
+  }
+}
