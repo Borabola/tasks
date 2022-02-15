@@ -5,7 +5,8 @@ import {calculateRentalCost,
     moveZeros,
     createUrl,
 	invertColor,
-	transformState} from './task.js';
+	transformState,
+    invertObject} from './task.js';
 describe('calculateRentalCost function', () => {
     test('should return value correctly', () => {
         expect(calculateRentalCost(2)).toBe(80);
@@ -37,13 +38,11 @@ describe('reverseWords', () => {
         expect(reverseWords('The quick lazy dog.')).toBe('ehT kciuq yzal .god');
     })
 })
-
 describe('createUrl', () => {
     test('should return value correctly', () => {
         expect(createUrl('/api/{list}/{id}', {list: 'items', id: 0})).toBe('/api/items/0');
     })
 })
-
 describe('invertColor', () => {
     test('should return value correctly', () => {
         expect(invertColor('#012345')).toBe('#fedcba');
@@ -52,8 +51,6 @@ describe('invertColor', () => {
 		expect(() => invertColor('#01234')).toThrowError(new Error('Invalid HEX color.'));
     })
 })
-
-
 describe('transformState', () => {
     test('addProperties: should return value correctly', () => {
         expect(transformState(
@@ -73,14 +70,13 @@ describe('transformState', () => {
 			[{operation: 'clear'}]))
 			.toEqual({})
     })
-	test('clear: should return value correctly', () => {
+	test('should throw error with unknown operetion', () => {
         expect(() => transformState(
 			{foo: 'bar', name: 'Jim'},
 			[{operation: 'delete'}]))
 			.toThrowError(new Error('Operation name delete is unknown'))
     })
-
-	test('clear: should return value correctly', () => {
+	test('should throw error with mistakes in properties', () => {
         expect(() => transformState(
 			{foo: 'bar', name: 'Jim'},
 			[{operation: 'removeProperties', properties: 'foo'}]))
@@ -88,3 +84,15 @@ describe('transformState', () => {
     })
 })
 
+describe('invertObject', () => {
+    test('should return value correctly', () => {
+        expect(invertObject({"foo": "bar", "hello": "world"})).toEqual({bar: 'foo', world: 'hello'});
+    })
+    test('should return value correctly with repeated values', () => {
+        expect(invertObject({"foo": "bar", "hello": "world", "js": "bar"})).toEqual(null);
+    })
+    test('should return emty object with it as a parameter', () => {
+        expect(invertObject({})).toEqual({});
+    })
+
+})

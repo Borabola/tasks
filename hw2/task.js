@@ -168,12 +168,30 @@ export  const transformState = (state, transforms) => {
 }
 
 console.log(transformState(
-{foo: 'bar', name: 'Jim', another: 'one'},
-[
-	{operation: 'addProperties', properties: {yet: 'another property'}}, 
-	{operation: 'clear'},
-	{operation: 'addProperties', properties: {foo: 'bar', name: 'Jim'}}
-]
-) 
+	{foo: 'bar', name: 'Jim', another: 'one'},
+	[
+		{operation: 'addProperties', properties: {yet: 'another property'}}, 
+		{operation: 'clear'},
+		{operation: 'addProperties', properties: {foo: 'bar', name: 'Jim'}}
+	]
+	) 
 )
-  
+
+export const invertObject = (object) => {
+	const values = Object.values(object)
+	if (values.length === 0) {
+		return {}
+	}
+	if (values.length !== Array.from(new Set([...values])).length) {
+		return null;
+	}
+	let invertedObject = {};
+	for (const tuple of Object.entries(object)) {
+		invertedObject = {...invertedObject, ...{[tuple[1]]: tuple[0]}}
+	  }
+	return invertedObject
+}
+console.log('invertObject');
+console.log(invertObject({}));
+console.log(invertObject({"foo": "bar", "hello": "world"}))
+console.log(invertObject({"foo": "bar", "hello": "world", "js": "bar"}))
